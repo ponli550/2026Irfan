@@ -15,11 +15,11 @@ cons:
 (Describe the best practice pattern here)
 
 ## Snippet
-<!-- JAAVIS:EXEC -->
+'<!-- jcapy:EXEC -->
 ```bash
 kubectl get pods -l app=a-deployment
 ```
-<!-- JAAVIS:EXEC -->
+<!-- jcapy:EXEC -->
 ```bash
 supabase link
 supabase migration list
