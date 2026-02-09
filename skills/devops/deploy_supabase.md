@@ -15,7 +15,7 @@ cons:
 (Describe the best practice pattern here)
 
 ## Snippet
-<!-- JAAVIS:EXEC -->
+<!-- jcapy:EXEC -->
 ```bash
 brew install supabase/tap/supabase
 supabase init
