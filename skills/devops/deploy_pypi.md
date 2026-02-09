@@ -1,113 +1,84 @@
 ---
-tags: [tag1, tag2]
+tags: [pypi, packaging, distribution]
 grade: A
 ---
 
-# Deploy pypi
+# 🚀 Deploy to PyPI
 
-> to package python
+> Automated workflow to package and distribute Python projects globally via PyPI.
 
-## Pros
-  - "world wide use"
+## ⚖️ Evaluation
+- **Pros**: Enables global `pip install` capability; establishes versioned distribution.
+- **Cons**: Requires strict metadata management; TestPyPI is ephemeral (packages may be deleted).
 
-## Cons
-  - "good"
+## 🛠 Implementation
 
-## Implementation
-<!-- jcapy:EXEC -->
 ```bash
-echo "set up variables"
-PROJECT_NAME=$(basename "$PWD" | tr '[:upper:]' '[:lower:]')
+echo "💎 Initializing Glass Box Environment..."
+PROJECT_NAME=$(basename "$PWD" | tr '[:upper:]' '[:lower:]' | tr ' ' '_')
 
-echo "set up venv"
+# 1. Environment Setup
+echo "📦 Setting up isolated build environment..."
 python3 -m venv venv
-echo "activating venv"
 source venv/bin/activate
-echo "making sure you have the latest version installed"
-python3 -m pip install --upgrade pip
-echo "creating a new directory for your project and cd into it"
-<!-- jcapy:EXEC -->
-mkdir packaging_tutorial
-cd packaging_tutorial
-<!-- jcapy:EXEC -->
-mkdir src/example_package_YOUR_USERNAME_HERE
-cd src/example_package_YOUR_USERNAME_HERE
-<!-- jcapy:EXEC -->
-touch __init__.py example.py
+python3 -m pip install --upgrade pip build twine
 
-```
-packaging_tutorial/
-└── src/
-    └── example_package_YOUR_USERNAME_HERE/
-        ├── __init__.py
-        └── example.py
+# 2. Structure Creation
+echo "🏗 Building directory scaffolding..."
+mkdir -p "src/${PROJECT_NAME}"
+touch "src/${PROJECT_NAME}/__init__.py"
+touch "src/${PROJECT_NAME}/main.py"
 
-<!-- jcapy:EXEC -->
-```bash
-echo "creating pyproject.toml"
-cd ..
-mkdir pyproject.toml
-echo "writing pyproject.toml"
-<!-- jcapy:EXEC -->
+# 3. Metadata Generation
+echo "📝 Writing pyproject.toml..."
 cat << EOF > pyproject.toml
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name = "$PROJECT_NAME"
+name = "${PROJECT_NAME}"
 version = "0.0.1"
 authors = [
-  { name="Example Author", email="author@example.com" },
+  { name="Developer", email="dev@example.com" },
 ]
-description = "A small example package"
+description = "A Jaavis-generated automated package"
 readme = "README.md"
 requires-python = ">=3.9"
 classifiers = [
     "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-license = "MIT"
-license-files = ["LICEN[CS]E*"]
 
 [project.urls]
-Homepage = "https://github.com/pypa/sampleproject"
-Issues = "https://github.com/pypa/sampleproject/issues"
+Homepage = "[https://github.com/user/$](https://github.com/user/$){PROJECT_NAME}"
 EOF
 
-<!-- jcapy:EXEC -->
-```bash
-echo "creating README.md"
+echo "📖 Creating documentation..."
 cat << EOF > README.md
-# Example Package
+# ${PROJECT_NAME}
 
-This is a simple example package. You can use
-[GitHub-flavored Markdown](https://guides.github.com/features/mastering-markdown/)
-to write your content.
+Generated via Jaavis Workflow.
+Install using:
+\`\`\`bash
+pip install ${PROJECT_NAME}
+\`\`\`
 EOF
-<!-- jcapy:EXEC -->
-echo "Generating distribution archives"
-python3 -m pip install --upgrade build
+
+# 4. Build Phase
+echo "🔨 Generating distribution archives (Wheel & SDist)..."
 python3 -m build
-echo "This command should output a lot of text and once completed should generate two files in the dist directory:
 
-dist/
-├── example_package_YOUR_USERNAME_HERE-0.0.1-py3-none-any.whl
-└── example_package_YOUR_USERNAME_HERE-0.0.1.tar.gz"
 
-<!-- jcapy:EXEC -->
-```bash
-echo "Uploading the package to PyPI"
-python3 -m pip install --upgrade twine
-twine upload dist/*
-echo "You will be prompted for an API token. Use the token value, including the pypi- prefix. Note that the input will be hidden, so be sure to paste correctly."
-```
-<!-- jcapy:EXEC -->
-```bash
-echo "Installing your newly uploaded package"
-echo "Make sure to specify your username in the package name!"
-python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps $PROJECT_NAME
-echo "test it"
-$PROJECT_NAME
-echo "Keep in mind that this tutorial showed you how to upload your package to Test PyPI, which isn’t a permanent storage. The Test system occasionally deletes packages and accounts. It is best to use TestPyPI for testing and experiments like this tutorial."
 
-echo "deactivate venv"
-python3 deactivate
-```
+# 5. Deployment Phase (TestPyPI)
+echo "🚀 Uploading to TestPyPI..."
+# Note: Requires __token__ as username and your PyPI API token as password
+python3 -m twine upload --repository testpypi dist/*
 
+echo "✅ Deployment Complete."
+echo "To verify, run: pip install --index-url [https://test.pypi.org/simple/](https://test.pypi.org/simple/) --no-deps ${PROJECT_NAME}"
+
+# Cleanup
+deactivate
