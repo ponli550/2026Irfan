@@ -12,7 +12,7 @@ grade: A
 - **Cons**: Requires strict metadata management; TestPyPI is ephemeral (packages may be deleted).
 
 ## 🛠 Implementation
-
+<!--jcapy-->
 ```bash
 echo "💎 Initializing Glass Box Environment..."
 PROJECT_NAME=$(basename "$PWD" | tr '[:upper:]' '[:lower:]' | tr ' ' '_')

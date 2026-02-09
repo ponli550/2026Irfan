@@ -10,12 +10,10 @@ cons:
 ---
 
 # Deploy TerminateProject
-<!-- JAAVIS:EXEC -->
+<!-- jcapy:EXEC -->
 ```bash
 supabase stop
-```
-<!-- JAAVIS:EXEC -->
-```bash
 echo "cd .."
+cd ..
 echo "rm -rf {project-name}"
 ```
