@@ -1,21 +1,8 @@
----
-tags: [tag1, tag2]
-grade: B
----
+# Deployment: react
+> Harvested on 2026-02-09 10:57:29.278064
 
-# Deploy react
-
-> test
-
-## Pros
-  - "hehe"
-
-## Cons
-  - "hehe"
-
-## Implementation
+## Execution Plan
 <!-- jcapy:EXEC -->
 ```bash
-(Paste your code snippet here)
+npx create vite@latest --template --react
 ```
-        

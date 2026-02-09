@@ -4,7 +4,7 @@ domain: deployment
 tags: [tag1, tag2]
 ---
 # Step 1: Scaffold Project
-<!-- JAAVIS:EXEC -->
+<!-- jcapy:EXEC -->
 ```bash
 # 1. Setup Variables
 PROJECT_NAME=$(basename "$PWD" | tr '[:upper:]' '[:lower:]')
