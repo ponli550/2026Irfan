@@ -17,9 +17,20 @@ grade: A
 <!-- jcapy:EXEC -->
 ```bash
 jcapy
-
-jcapy doctor 
-jcapy init
-jcapy deploy 
 ```
-        
+<!-- jcapy:EXEC -->
+```bash
+jcapy doctor
+```
+<!-- jcapy:EXEC -->
+```bash
+jcapy init
+```
+<!-- jcapy:EXEC -->
+
+jcapy deploy
+
+```
+```python
+
+```
